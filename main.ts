@@ -1,5 +1,5 @@
-const WORLD_WIDTH = 80
-const WORLD_HEIGHT = 48
+const WORLD_WIDTH = 160
+const WORLD_HEIGHT = 160
 const DISP_CELL_ALIVE = "<span style='background-color: cyan;'> </span>"
 const DISP_CELL_DEAD = " "
 let ary = []
@@ -32,6 +32,23 @@ let draw = () => {
     dom.push('\n')
   }
   document.querySelector("#world").innerHTML = dom.join('')
+}
+
+let drawCanvas = () => {
+  const cv = <HTMLCanvasElement> document.querySelector("#cv")
+  const ctx = cv.getContext("2d")
+  const size = 5
+  for (let y = 0; y < WORLD_HEIGHT; y++) {
+    for (let x = 0; x < WORLD_WIDTH; x++) {
+      if (ary[y][x] === 1) {
+        ctx.fillStyle = 'black'
+        ctx.fillRect(x * size, y * size, size, size)
+      } else if (ary[y][x] === 0) {
+        ctx.fillStyle = 'white'
+        ctx.fillRect(x * size, y * size, size, size)
+      }
+    }
+  }
 }
 
 let updateWorld = () => {
@@ -181,14 +198,15 @@ let updateWorld = () => {
 
 let skipDay = () => {
   ary = updateWorld()
-  draw()
+  // draw()
+  drawCanvas()
 }
 
 let startGame = () => {
   if (timer === undefined) {
     timer = setInterval(
       () => {skipDay()},
-      100
+      20
     )
   }
 }
@@ -201,12 +219,14 @@ let stopGame = () => {
 let resetGame = () => {
   stopGame()
   init()
-  draw()
+  // draw()
+  drawCanvas()
 }
 
 window.onload = () => {
   init()
-  draw()
+  // draw()
+  drawCanvas()
   document.querySelector("#start").addEventListener("click", startGame)
   document.querySelector("#stop").addEventListener("click", stopGame)
   document.querySelector("#reset").addEventListener("click", resetGame)
