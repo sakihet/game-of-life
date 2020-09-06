@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sakihet/game-of-life/issues"
   },
-  "homepage": "https://github.com/sakihet/game-of-life#readme"
+  "homepage": "https://github.com/sakihet/game-of-life#readme",
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
 }
