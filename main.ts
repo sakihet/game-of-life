@@ -1,5 +1,5 @@
-const WORLD_WIDTH = 160
-const WORLD_HEIGHT = 160
+const WORLD_WIDTH = 200
+const WORLD_HEIGHT = 200
 const DISP_CELL_ALIVE = "<span style='background-color: cyan;'> </span>"
 const DISP_CELL_DEAD = " "
 let ary = []
@@ -37,7 +37,7 @@ let draw = () => {
 let drawCanvas = () => {
   const cv = <HTMLCanvasElement> document.querySelector("#cv")
   const ctx = cv.getContext("2d")
-  const size = 5
+  const size = 4
   for (let y = 0; y < WORLD_HEIGHT; y++) {
     for (let x = 0; x < WORLD_WIDTH; x++) {
       if (ary[y][x] === 1) {
@@ -206,7 +206,7 @@ let startGame = () => {
   if (timer === undefined) {
     timer = setInterval(
       () => {skipDay()},
-      20
+      50
     )
   }
 }
