@@ -51,72 +51,77 @@ let drawCanvas = () => {
   }
 }
 
+let sumOfNeighborLivingCells = (x, y) => {
+  let sum = 0
+  if (y === 0 && x === 0) {
+    sum = 
+      ary[y][x+1] +
+      ary[y+1][x] +
+      ary[y+1][x+1]
+  } else if (y === 0 && 1 <= x && x < (WORLD_WIDTH - 1) ){
+    sum =
+      ary[y][x-1] +
+      ary[y][x+1] +
+      ary[y+1][x-1] +
+      ary[y+1][x] +
+      ary[y+1][x+1]
+  } else if (y === 0 && x === (WORLD_WIDTH - 1)) {
+    sum =
+      ary[y][x-1] +
+      ary[y+1][x-1] +
+      ary[y+1][x]
+  } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === 0) {
+    sum =
+      ary[y-1][x] +
+      ary[y-1][x+1] +
+      ary[y][x+1] +
+      ary[y+1][x] +
+      ary[y+1][x+1]
+  } else if (1 <= y && y < (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
+    sum =
+      ary[y-1][x-1] +
+      ary[y-1][x] +
+      ary[y-1][x+1] +
+      ary[y][x-1] +
+      ary[y][x+1] +
+      ary[y+1][x-1] +
+      ary[y+1][x] +
+      ary[y+1][x+1]
+  } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
+    sum =
+      ary[y-1][x-1] +
+      ary[y-1][x] +
+      ary[y][x-1] +
+      ary[y+1][x-1] +
+      ary[y+1][x]
+  } else if (y === (WORLD_HEIGHT - 1) && x === 0) {
+    sum =
+      ary[y-1][x] +
+      ary[y-1][x+1] +
+      ary[y][x+1]
+  } else if (y === (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
+    sum =
+      ary[y-1][x-1] +
+      ary[y-1][x] +
+      ary[y-1][x+1] +
+      ary[y][x-1] +
+      ary[y][x+1]
+  } else if (y === (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
+    sum =
+      ary[y-1][x-1] +
+      ary[y-1][x] +
+      ary[y][x-1]
+  }
+  return sum
+}
+
 let updateWorld = () => {
   let newAry = []
   for (let y = 0; y < WORLD_HEIGHT; y++) {
     newAry.push([])
     for (let x = 0; x < WORLD_WIDTH; x++) {
       if (ary[y][x] === 1) {
-        let sum = 0
-        if (y === 0 && x === 0) {
-          sum = 
-            ary[y][x+1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (y === 0 && 1 <= x && x < (WORLD_WIDTH - 1) ){
-          sum =
-            ary[y][x-1] +
-            ary[y][x+1] +
-            ary[y+1][x-1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (y === 0 && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y][x-1] +
-            ary[y+1][x-1] +
-            ary[y+1][x]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === 0) {
-          sum =
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x+1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x-1] +
-            ary[y][x+1] +
-            ary[y+1][x-1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y][x-1] +
-            ary[y+1][x-1] +
-            ary[y+1][x]
-        } else if (y === (WORLD_HEIGHT - 1) && x === 0) {
-          sum =
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x+1]
-        } else if (y === (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x-1] +
-            ary[y][x+1]
-        } else if (y === (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y][x-1]
-        }
+        let sum = sumOfNeighborLivingCells(x, y)
         if (sum === 2 || sum === 3) {
           newAry[y][x] = 1
         } else if (sum <= 1) {
@@ -125,66 +130,7 @@ let updateWorld = () => {
           newAry[y][x] = 0
         }
       } else if (ary[y][x] === 0) {
-        let sum = 0
-        if (y === 0 && x === 0) {
-          sum = 
-            ary[y][x+1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (y === 0 && 1 <= x && x < (WORLD_WIDTH - 1) ){
-          sum =
-            ary[y][x-1] +
-            ary[y][x+1] +
-            ary[y+1][x-1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (y === 0 && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y][x-1] +
-            ary[y+1][x-1] +
-            ary[y+1][x]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === 0) {
-          sum =
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x+1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x-1] +
-            ary[y][x+1] +
-            ary[y+1][x-1] +
-            ary[y+1][x] +
-            ary[y+1][x+1]
-        } else if (1 <= y && y < (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y][x-1] +
-            ary[y+1][x-1] +
-            ary[y+1][x]
-        } else if (y === (WORLD_HEIGHT - 1) && x === 0) {
-          sum =
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x+1]
-        } else if (y === (WORLD_HEIGHT - 1) && 1 <= x && x < (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y-1][x+1] +
-            ary[y][x-1] +
-            ary[y][x+1]
-        } else if (y === (WORLD_HEIGHT - 1) && x === (WORLD_WIDTH - 1)) {
-          sum =
-            ary[y-1][x-1] +
-            ary[y-1][x] +
-            ary[y][x-1]
-        }
+        let sum = sumOfNeighborLivingCells(x, y)
         if (sum === 3) {
           newAry[y][x] = 1
         } else {
