@@ -5,7 +5,7 @@ const DISP_CELL_DEAD = " "
 let ary = []
 let timer = undefined
 
-let randomInt = (min, max) => {
+let randomInt = (min:number, max:number):number => {
   return min + Math.floor(Math.random() * (max - min))
 }
 
@@ -51,7 +51,7 @@ let drawCanvas = () => {
   }
 }
 
-let sumOfNeighborLivingCells = (x, y) => {
+let sumOfNeighborLivingCells = (x:number, y:number):number => {
   let sum = 0
   if (y === 0 && x === 0) {
     sum = 
