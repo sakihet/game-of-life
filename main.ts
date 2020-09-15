@@ -1,8 +1,6 @@
 export default () => {
   const WORLD_WIDTH = 200
   const WORLD_HEIGHT = 200
-  const DISP_CELL_ALIVE = "<span style='background-color: cyan;'> </span>"
-  const DISP_CELL_DEAD = " "
   let ary = []
   let timer = undefined
 
@@ -18,21 +16,6 @@ export default () => {
         ary[i][j] = v
       }
     }
-  }
-
-  let draw = () => {
-    let dom = []
-    for (let y = 0; y < WORLD_HEIGHT; y++) {
-      for (let x = 0; x < WORLD_WIDTH; x++) {
-        if (ary[y][x] === 1) {
-          dom.push(DISP_CELL_ALIVE)
-        } else if (ary[y][x] === 0) {
-          dom.push(DISP_CELL_DEAD)
-        }
-      }
-      dom.push('\n')
-    }
-    document.querySelector("#world").innerHTML = dom.join('')
   }
 
   let drawCanvas = () => {
@@ -145,7 +128,6 @@ export default () => {
 
   let skipDay = () => {
     ary = updateWorld()
-    // draw()
     drawCanvas()
   }
 
@@ -166,13 +148,11 @@ export default () => {
   let resetGame = () => {
     stopGame()
     init()
-    // draw()
     drawCanvas()
   }
 
   window.onload = () => {
     init()
-    // draw()
     drawCanvas()
     document.querySelector("#start").addEventListener("click", startGame)
     document.querySelector("#stop").addEventListener("click", stopGame)
