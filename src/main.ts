@@ -2,6 +2,7 @@ import './style.css'
 
 const WORLD_WIDTH: number = 200
 const WORLD_HEIGHT: number = 200
+let interval: number = 50
 let ary: number[][] = []
 let timer: number | undefined
 
@@ -138,7 +139,7 @@ const startGame = () => {
   if (timer === undefined) {
     timer = setInterval(
       () => {skipDay()},
-      50
+      interval
     )
   }
 }
@@ -154,9 +155,17 @@ const resetGame = () => {
   drawCanvas()
 }
 
+const updateInterval = (e: Event) => {
+  if (!(e.currentTarget instanceof HTMLInputElement)) {
+    return
+  }
+  interval = Number(e.currentTarget.value)
+}
+
 init()
 drawCanvas()
 
 document.querySelector<HTMLButtonElement>("#start")!.addEventListener("click", startGame)
 document.querySelector<HTMLButtonElement>("#stop")!.addEventListener("click", stopGame)
 document.querySelector<HTMLButtonElement>("#reset")!.addEventListener("click", resetGame)
+document.querySelector<HTMLButtonElement>("#interval")!.addEventListener("change", updateInterval)
