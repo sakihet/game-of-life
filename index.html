@@ -15,7 +15,55 @@
     <title>Game of Life</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>Game of Life</h1>
+      <div class="my-4">
+        <button
+          id="start"
+          type="button"
+          class="px-4 py-2"
+        >
+          Start
+        </button>
+        <button
+          id="stop"
+          type="button"
+          class="px-4 py-2"
+        >
+          Stop
+        </button>
+        <button
+          id="reset"
+          type="button"
+          class="px-4 py-2"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="m-4">
+        <canvas
+          id="cv"
+          width="800"
+          height="800"
+          class="border-1 border-solid"
+        ></canvas>
+      </div>
+      <div class="h-8">
+        <div class="text-center">
+          <a href="https://github.com/sakihet/game-of-life">GitHub</a>
+        </div>
+      </div>
+      <div class="text-center text-small h-6 flex-column">
+        <div class="py-2">
+          <a
+            class="text-secondary text-decoration-none"
+            href="https://sakih.net/"
+          >
+            Copyright ©︎ 2020-PRESENT saki
+          </a>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
